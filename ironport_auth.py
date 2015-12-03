@@ -150,12 +150,13 @@ def init_logger():
     handler = logging.StreamHandler()
     handler.setLevel(logging.INFO)
 
-    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s [NOPROXY AUTH]")
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
-def main():
-    (username, password) = get_cred()
+def main(username=None, password=None):
+    if username is None or password is None:
+        (username, password) = get_cred()
     keep_logging_in(username, password)
 
 def main_debug():
