@@ -8,7 +8,7 @@ import re
 import socket
 import atexit
 
-RETRY_INTERVAL = 30
+RETRY_INTERVAL = 300
 
 def check_status():
     logger = logging.getLogger("auth")
@@ -88,7 +88,7 @@ def attempt_login(username, password):
     logger = logging.getLogger("auth")
 
     status, sid = check_status()
-    
+
     if sid is None:
         return
 
