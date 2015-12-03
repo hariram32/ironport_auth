@@ -5,6 +5,7 @@ import getpass
 import logging
 import time
 import re
+import socket
 import atexit
 
 RETRY_INTERVAL = 30
@@ -24,6 +25,9 @@ def check_status():
                 return ('Logged in', sid)
         else:
             logger.info('Error checking status. Unexpected response %d. Retrying in %d seconds.' % (response.status, RETRY_INTERVAL))
+    except (httplib.HTTPException, socket.error) as e:
+        logger.info("Caught exception: %s. Please check your internet connection/gateway. Retrying in %d seconds." % (e, RETRY_INTERVAL))
+        return (None, None)
     finally:
         conn.close()
 
@@ -44,14 +48,15 @@ def attemp_logout(sid):
         else:
             sid = re.search(r'name=sid value="([0-9a-f]+)"', postData, re.IGNORECASE)
             return req_login_page(sid)
-    except:
-        logger.info("Error sending post request. Please check your internet connection/gateway. Retrying in %d seconds." % (RETRY_INTERVAL))
+    except (httplib.HTTPException, socket.error) as e:
+        logger.info("Caught exception: %s. Please check your internet connection/gateway. Retrying in %d seconds." % (e, RETRY_INTERVAL))
+        return None
     finally:
         postconn.close()
 
 def atexit_procedure():
     status, sid = check_status()
-    if status == "Logged in":
+    if status == "Logged in" and sid is not None:
         attemp_logout(sid)
     print("User logged out.")
 
@@ -72,8 +77,9 @@ def req_login_page(sid):
         else:
             sid = re.search(r'name=sid value="([0-9a-f]+)"', postData, re.IGNORECASE)
             return sid
-    except:
-        logger.info("Error sending post request. Please check your internet connection/gateway. Retrying in %d seconds." % (RETRY_INTERVAL))
+    except (httplib.HTTPException, socket.error) as e:
+        logger.info("Caught exception: %s. Please check your internet connection/gateway. Retrying in %d seconds." % (e, RETRY_INTERVAL))
+        return None
     finally:
         postconn.close()
 
@@ -82,11 +88,16 @@ def attempt_login(username, password):
     logger = logging.getLogger("auth")
 
     status, sid = check_status()
+    if sid is None:
+        return
 
     if status == "Logged in":
         sid = attemp_logout(sid)
     elif status == "Not logged in":
         sid = req_login_page(sid)
+
+    if sid is None:
+        return
 
     params = urllib.urlencode({'username': username, 'password': password, 'sid': sid})
     headers = {"Content-Type": "application/x-www-form-urlencoded",
@@ -107,8 +118,8 @@ def attempt_login(username, password):
                 exit(0)
             else:
                 logger.info("Currently logged in.")
-    except:
-    	logger.info("Error sending post request. Please check your internet connection/gateway. Retrying in %d seconds." % (RETRY_INTERVAL))
+    except (httplib.HTTPException, socket.error) as e:
+        logger.info("Caught exception: %s. Please check your internet connection/gateway. Retrying in %d seconds." % (e, RETRY_INTERVAL))
     finally:
         postconn.close()
 
