@@ -18,7 +18,7 @@ def check_status():
         response = conn.getresponse()
         data = response.read()
         if response.status == 200:
-            sid = re.search(r'name=sid value="([0-9a-f]+)"', data, re.IGNORECASE)
+            sid = re.search(r'name=sid value="([0-9a-f]+)"', data, re.IGNORECASE).group(1)
             if 'You are not logged in' in data:
                 return ('Not logged in', sid)
             elif 'You are logged in' in data:
@@ -46,7 +46,7 @@ def attemp_logout(sid):
         if postResponse.status != 200:
             logger.info("Error loggin in. Server responded with status code %d. Retrying in %d seconds." % (postResponse.status, RETRY_INTERVAL))
         else:
-            sid = re.search(r'name=sid value="([0-9a-f]+)"', postData, re.IGNORECASE)
+            sid = re.search(r'name=sid value="([0-9a-f]+)"', postData, re.IGNORECASE).group(1)
             return req_login_page(sid)
     except (httplib.HTTPException, socket.error) as e:
         logger.info("Caught exception: %s. Please check your internet connection/gateway. Retrying in %d seconds." % (e, RETRY_INTERVAL))
@@ -75,7 +75,7 @@ def req_login_page(sid):
         if postResponse.status != 200:
             logger.info("Error loggin in. Server responded with status code %d. Retrying in %d seconds." % (postResponse.status, RETRY_INTERVAL))
         else:
-            sid = re.search(r'name=sid value="([0-9a-f]+)"', postData, re.IGNORECASE)
+            sid = re.search(r'name=sid value="([0-9a-f]+)"', postData, re.IGNORECASE).group(1)
             return sid
     except (httplib.HTTPException, socket.error) as e:
         logger.info("Caught exception: %s. Please check your internet connection/gateway. Retrying in %d seconds." % (e, RETRY_INTERVAL))
@@ -88,6 +88,7 @@ def attempt_login(username, password):
     logger = logging.getLogger("auth")
 
     status, sid = check_status()
+    
     if sid is None:
         return
 
