@@ -6,7 +6,7 @@
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPNOMODIFY" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="ARPNOREPAIR" Value="1"/>
-    <ROW Property="ARPPRODUCTICON" Value="IronPort_logo.exe" Type="8"/>
+    <ROW Property="ARPPRODUCTICON" Value="IronPort_logo_1.exe" Type="8"/>
     <ROW Property="ARPURLINFOABOUT" Value="https://github.com/krgaurav94/ironport_auth/wiki"/>
     <ROW Property="Manufacturer" Value="KRGAURAV94"/>
     <ROW Property="ProductCode" Value="1033:{1B33EDA2-3308-495E-A362-B2462EC11BDF} " Type="16"/>
@@ -102,7 +102,7 @@
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlComponent">
-    <ROW Dialog_="LicenseAgreementDlg" Control="AgreementText" Type="ScrollableText" X="20" Y="60" Width="330" Height="120" Attributes="7" Text="C:\Users\Gaurav\Desktop\License_GPL.rtf" Order="400" TextLocId="Control.Text.LicenseAgreementDlg#AgreementText" MsiKey="LicenseAgreementDlg#AgreementText"/>
+    <ROW Dialog_="LicenseAgreementDlg" Control="AgreementText" Type="ScrollableText" X="20" Y="60" Width="330" Height="120" Attributes="7" Text="License_GPL.rtf" Order="400" TextLocId="Control.Text.LicenseAgreementDlg#AgreementText_2" MsiKey="LicenseAgreementDlg#AgreementText"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
     <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="LicenseAgreementDlg" Condition="AI_INSTALL" Ordering="1"/>
@@ -147,7 +147,7 @@
     <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
-    <ROW Name="IronPort_logo.exe" SourcePath="C:\Users\Gaurav\Desktop\IronPort_logo.ico" Index="0"/>
+    <ROW Name="IronPort_logo_1.exe" SourcePath="IronPort_logo.ico" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
@@ -170,9 +170,9 @@
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="IronportDualAuthentication" Directory_="SHORTCUTDIR" Name="IRONPO~1|Ironport Dual Authentication" Component_="ironport_auth_dual.exe" Target="[#ironport_auth_dual.exe]" Hotkey="0" Icon_="IronPort_logo.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-    <ROW Shortcut="IronportDualAuthentication_1" Directory_="ProgramMenuFolder" Name="IRONPO~1|Ironport Dual Authentication" Component_="ironport_auth_dual.exe" Target="[#ironport_auth_dual.exe]" Hotkey="0" Icon_="IronPort_logo.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-    <ROW Shortcut="IronportDualAuthentication_2" Directory_="DesktopFolder" Name="IRONPO~1|Ironport Dual Authentication" Component_="ironport_auth_dual.exe" Target="[#ironport_auth_dual.exe]" Hotkey="0" Icon_="IronPort_logo.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="IronportDualAuthentication" Directory_="SHORTCUTDIR" Name="IRONPO~1|Ironport Dual Authentication" Component_="ironport_auth_dual.exe" Target="[#ironport_auth_dual.exe]" Hotkey="0" Icon_="IronPort_logo_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="IronportDualAuthentication_1" Directory_="ProgramMenuFolder" Name="IRONPO~1|Ironport Dual Authentication" Component_="ironport_auth_dual.exe" Target="[#ironport_auth_dual.exe]" Hotkey="0" Icon_="IronPort_logo_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="IronportDualAuthentication_2" Directory_="DesktopFolder" Name="IRONPO~1|Ironport Dual Authentication" Component_="ironport_auth_dual.exe" Target="[#ironport_auth_dual.exe]" Hotkey="0" Icon_="IronPort_logo_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
