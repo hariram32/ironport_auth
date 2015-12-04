@@ -1,4 +1,4 @@
-import thread
+from threading import Thread
 import ironport_proxy_auth as ipa
 import ironport_auth as ia
 import sys
@@ -6,11 +6,15 @@ import getpass
 
 def create_threads(username, password):
     try:
-        thread.start_new_thread(ia.main, (username, password, ))
-        thread.start_new_thread(ipa.main, (username, password, ))
+        t1 = Thread(target=ia.main, args=(username, password, ))
+        t2 = Thread(target=ipa.main, args=(username, password, ))
+        t1.start()
+        t2.start()
+        t1.join()
+        t2.join()
     except:
         print "Error: unable to start thread"
-        exit(0)
+        sys.exit(0)
 
 def get_cred():
     print("Username: "),
@@ -28,8 +32,7 @@ def main():
         print "Invalid arguments"
         return
     create_threads(username, password)
-    while 1:
-        pass
+
 
 if __name__ == "__main__":
     main()

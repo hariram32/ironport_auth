@@ -122,7 +122,7 @@ def attempt_login(username, password):
         else:
             if 'Credentials Rejected' in postData:
                 print("Username or password incorrect.")
-                exit(0)
+                sys.exit(0)
             else:
                 logger.info("Currently logged in.")
                 return RETRY_INTERVAL
