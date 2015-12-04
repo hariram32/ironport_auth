@@ -11,7 +11,7 @@
     <ROW Property="Manufacturer" Value="KRGAURAV94"/>
     <ROW Property="ProductCode" Value="1033:{1B33EDA2-3308-495E-A362-B2462EC11BDF} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
-    <ROW Property="ProductName" Value="Ironport Authenticator"/>
+    <ROW Property="ProductName" Value="Ironport Dual Authenticator"/>
     <ROW Property="ProductVersion" Value="1.0.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{4F9A198D-173A-4216-8F32-C86755C3571E}"/>
